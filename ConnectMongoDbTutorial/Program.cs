@@ -41,11 +41,15 @@ public class Chat
 {
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
-    public string Id { get; set; }
+    public string Id { get; set; } = string.Empty;
     [BsonElement("name")]
     public string Name { get; set; } = string.Empty;
     [BsonElement("message")]
     public string Message { get; set; } = string.Empty;
+    [BsonElement("timestamp")]
+    [BsonRepresentation(BsonType.Timestamp)]
+    [BsonIgnoreIfNull]
+    public DateTime? Timestamp { get; set; } = DateTime.Now;
 
     // There is a BsonIgnoreIfNull attribute as well
 
