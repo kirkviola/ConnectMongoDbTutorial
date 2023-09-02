@@ -2,7 +2,7 @@
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
-
+using System.Runtime.CompilerServices;
 
 var connectionString = "mongodb://localhost:27017";
 var client = new MongoClient(connectionString);
@@ -25,7 +25,18 @@ foreach (var result in query)
     Console.WriteLine("{0}: {1}", result.Name, result.Message);
 }
 
+var newChat = new Chat()
+{
+    Name = "John",
+    Message = "Hello? Is this thing working?"
+};
 
+await collection.InsertOneAsync(newChat);
+
+var newEntry = await collection.AsQueryable().FirstOrDefaultAsync(x => x.Name == "John");
+
+if (newEntry != null)
+    Console.WriteLine($"{newEntry.Name} says {newEntry.Message}");
 public class Chat
 {
     [BsonId]
