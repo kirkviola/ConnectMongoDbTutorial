@@ -51,3 +51,6 @@ public class Chat
 
     public Chat() { }
 }
+
+// Commenting here to have a record of which packages to install:
+// MongoDB.Bson, MongoDB.Driver, MongoDB.Driver.Core
